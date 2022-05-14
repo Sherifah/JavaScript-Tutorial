@@ -193,6 +193,8 @@ john.average = calcAve(john.tip);
 console.log(mark);
 console.log(john);
 
+//learning git
+
 
 
 

@@ -85,7 +85,7 @@ function third() {
 
 //console.log(this); Regular
 
-calcAge(1997);
+/*calcAge(1997);
 
 function calcAge(year) {
     console.log(2022 - year);
@@ -102,7 +102,7 @@ var john = {
         /*function innerFunction() {
             console.log(this);
         }
-        innerFunction();*/
+        innerFunction();
     }
 
 }
@@ -115,4 +115,4 @@ var mike = {
 }
 
 mike.calcAge = john.calcAge;
-mike.calcAge()
+mike.calcAge()*/

@@ -8,3 +8,50 @@
  * The first player to reach 100 points on GLOBAL score wins the game
  * 
  */
+
+
+/***
+ * LESSONS:
+ * How to create our fundamental game variables
+ * How to generate a random number
+ * How to manipulate the DOM
+ * How to read from the DOM
+ * How to change CSS styles
+ */
+
+var scores, roundScore, activePlayer, dice;
+
+scores = [0, 0]; //Player scores
+roundScore = 0; //one round score at a time
+activePlayer = 0; //0 will be the first player and 1 will be the second player
+
+//Cal random number for dice using the math object
+
+dice = Math.floor(Math.random() * 6) + 1;
+//console.log(dice);
+
+//To change the content of a selector, we use .textcontent
+//To change the HTML of a selector, we use .innerHTML
+document.querySelector('#current-' + activePlayer).textContent = dice;
+//document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -23,6 +23,9 @@
  * What an anonymous function is
  * Another to select elements by id
  * How to change the image in an <img> element
+ * 
+ * What the ternary operator is
+ * How to add, remove and toggle HTML classes
  */
 
 var scores, roundScore, activePlayer;
@@ -60,7 +63,21 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 
 
     //3.Update the round score IF the rolled number was NOT a 1
+    if (dice !== 1) {
+        //Add score
+        roundScore += dice;
+        document.querySelector('#current-' + activePlayer).textContent = roundScore;
+    } else {
+        //Next player
+        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0; //ternary operator
+        roundScore = 0;
 
+        document.getElementById('current-0').textContent = '0';
+        document.getElementById('current-1').textContent = '0';
+
+        document.querySelector('.player-0-panel').classList.remove('active');
+        document.querySelector('.player-1-panel').classList.add('active');
+    }
 
 
 })

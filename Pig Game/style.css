@@ -1,8 +1,6 @@
 /*****************GENERAL*/
 
 
-
-
 * {
     margin: 0;
     padding: 0;
@@ -37,9 +35,6 @@ body {
     box-shadow: 8px 10px 50px rgba(0, 0, 0, 0.3);
     overflow: hidden;
 }
-.player-0-panel {
-    background-color: rgb(230, 230, 230);
-}
 
 .player-0-panel,
 .player-1-panel {
@@ -72,10 +67,6 @@ body {
 
 .active { background-color: #f7f7f7; }
 .active .player-name { font-weight: 300; }
-
-.player-0-panel {
-    background-color: rgb(240, 240, 240);
-}
 
 .active .player-name::after {
     content: "";

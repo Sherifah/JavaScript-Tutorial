@@ -31,9 +31,7 @@
 
 var scores, roundScore, activePlayer;
 
-scores = [0, 0]; //Player scores
-roundScore = 0; //one round score at a time
-activePlayer = 0; //0 will be the first player and 1 will be the second player
+init();
 
 
 //To change the content of a selector, we use .textcontent
@@ -41,13 +39,6 @@ activePlayer = 0; //0 will be the first player and 1 will be the second player
 //document.querySelector('#current-' + activePlayer).textContent = dice; //setting value
 //document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>';
 
-//To hide the dice at the beginning of the game
-document.querySelector('.dice').style.display = 'none';
-
-document.getElementById('score-0').textContent = '0';
-document.getElementById('score-1').textContent = '0';
-document.getElementById('current-0').textContent = '0';
-document.getElementById('current-1').textContent = '0';
 
 //Event and Event Handling
 
@@ -83,11 +74,36 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
     //2. Update the UI 
     document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
-    //3. Next Player
-    nextPlayer();
+    //3. Check if player won the game
+    if (scores[activePlayer] >= 20) {
+        document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
 
-    //4. Check if player won the game
-})
+        document.querySelector('.dice').style.display = 'none';
+        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+    } else {
+        //next player
+        nextPlayer();
+    }
+});
+
+document.querySelector('.btn-new').addEventListener('click', init)
+
+function init() {
+    scores = [0, 0]; //Player scores
+    roundScore = 0; //one round score at a time
+    activePlayer = 0; //0 will be the first player and 1 will be the second player
+
+    //To hide the dice at the beginning of the game
+    document.querySelector('.dice').style.display = 'none';
+
+    document.getElementById('score-0').textContent = '0';
+    document.getElementById('score-1').textContent = '0';
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0';
+    document.getElementById('name-0').textContent = 'Player 1';
+    document.getElementById('name-1').textContent = 'Player 2';
+}
 
 //To implement the Don't Repeat Yourself principle, we need to create another functiion for next player
 function nextPlayer() {

@@ -27,9 +27,10 @@
  * What the ternary operator is
  * How to add, remove and toggle HTML classes
  * 
+ * What is a state variable, how to use it and why
  */
 
-var scores, roundScore, activePlayer;
+var scores, roundScore, activePlayer, gamePlaying;
 
 init();
 
@@ -44,46 +45,51 @@ init();
 
 document.querySelector('.btn-roll').addEventListener('click', function() {
 
-    // 1. Random number for dice using the math object
-    var dice = Math.floor(Math.random() * 6) + 1;
+    if (gamePlaying) {
+        // 1. Random number for dice using the math object
+        var dice = Math.floor(Math.random() * 6) + 1;
 
-    //2. Display the result
-    var diceDOM = document.querySelector('.dice')
-    diceDOM.style.display = 'block'; //show
-    //To change the image on each click, we only need to change the source
-    diceDOM.src = 'dice-' + dice + '.png';
+        //2. Display the result
+        var diceDOM = document.querySelector('.dice')
+        diceDOM.style.display = 'block'; //show
+        //To change the image on each click, we only need to change the source
+        diceDOM.src = 'dice-' + dice + '.png';
 
 
-    //3.Update the round score IF the rolled number was NOT a 1
-    if (dice !== 1) {
-        //Add score
-        roundScore += dice;
-        document.querySelector('#current-' + activePlayer).textContent = roundScore;
-    } else {
-        //Next player
-        nextPlayer();
+        //3.Update the round score IF the rolled number was NOT a 1
+        if (dice !== 1) {
+            //Add score
+            roundScore += dice;
+            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+        } else {
+            //Next player
+            nextPlayer();
+        }
     }
-
 
 });
 
 document.querySelector('.btn-hold').addEventListener('click', function() {
-    //1. Add CURRENT score to the player's GLOBAL score
-    scores[activePlayer] += roundScore;
 
-    //2. Update the UI 
-    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+    if (gamePlaying) {
+        //1. Add CURRENT score to the player's GLOBAL score
+        scores[activePlayer] += roundScore;
 
-    //3. Check if player won the game
-    if (scores[activePlayer] >= 20) {
-        document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
+        //2. Update the UI 
+        document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
-        document.querySelector('.dice').style.display = 'none';
-        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
-        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
-    } else {
-        //next player
-        nextPlayer();
+        //3. Check if player won the game
+        if (scores[activePlayer] >= 20) {
+            document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
+
+            document.querySelector('.dice').style.display = 'none';
+            document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+            document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+            gamePlaying = false;
+        } else {
+            //next player
+            nextPlayer();
+        }
     }
 });
 
@@ -94,6 +100,8 @@ function init() {
     roundScore = 0; //one round score at a time
     activePlayer = 0; //0 will be the first player and 1 will be the second player
 
+    gamePlaying = true;
+
     //To hide the dice at the beginning of the game
     document.querySelector('.dice').style.display = 'none';
 
@@ -103,6 +111,12 @@ function init() {
     document.getElementById('current-1').textContent = '0';
     document.getElementById('name-0').textContent = 'Player 1';
     document.getElementById('name-1').textContent = 'Player 2';
+    document.querySelector('.player-0-panel').classList.remove('winner');
+    document.querySelector('.player-1-panel').classList.remove('winner');
+    document.querySelector('.player-0-panel').classList.remove('active');
+    document.querySelector('.player-1-panel').classList.remove('active');
+    document.querySelector('.player-0-panel').classList.add('active');
+
 }
 
 //To implement the Don't Repeat Yourself principle, we need to create another functiion for next player

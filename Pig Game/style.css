@@ -1,6 +1,23 @@
 /*****************GENERAL*/
 
 
+
+.form-control {
+    position: absolute;
+    width: 160px;
+    left: 50%;
+    top: 550px;
+    transform: translateX(-50%);
+    font-size: 18px;
+    font-family: 'Lato';
+    text-align: center;
+    padding: 5px;
+    text-transform: uppercase;
+    color: #555;
+}
+
+.form-control:focus { outline: none; }
+
 * {
     margin: 0;
     padding: 0;

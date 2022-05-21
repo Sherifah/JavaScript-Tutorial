@@ -34,15 +34,15 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 
 
        //3.Update the round score IF the rolled number was NOT a 1
-       if (diceOne !== 1 && diceTwo !== 1) {
+       if (diceOne === 6 && diceTwo === 6) {
+        //Player looses scores
+       scores[activePlayer] = 0;
+       document.querySelector('#score-' + [activePlayer]).textContent = '0';
+       nextPlayer()
+       } else if (diceOne !== 1 && diceTwo !== 1) {
         //Add score
         roundScore += diceOne + diceTwo;
         document.querySelector('#current-' + activePlayer).textContent = roundScore;
-        } else if (diceOne === 6 && diceTwo === 6) {
-            //Player looses scores
-           scores[activePlayer] = 0;
-           document.querySelector('#score-' + [activePlayer]).textContent = '0';
-           nextPlayer()
         } else {
             //Next player
             nextPlayer();
